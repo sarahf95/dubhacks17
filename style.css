@@ -64,11 +64,18 @@ footer {
 .footer {
     font-size: 15px;
 }
-img {
-    height: 150px;
+.pic {
+    height: 10vw;
+    padding: 5px;
     position: inline-block
+}
+
+.pic:hover {
+    opacity: .5;
 }
 
 .logo {
     height: 60px
 }
+
+

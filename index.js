@@ -16,7 +16,7 @@ $(function() {
   };
   firebase.initializeApp(config);
 
-}
+})
 
 // showing the image
 function readURL(input) {
