@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+
 body :not(h1) {
     font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 18px;
@@ -14,7 +17,7 @@ p {
 }
 
 .site-title {
-    font-size: 90px !important;
+    font-size: 80px !important;
     font-weight: 100 !important;
 }
 .site-title, .section-title, .sub-title, .name {
@@ -79,3 +82,6 @@ footer {
 }
 
 
+div.container{
+    margin: 20px;
+}
