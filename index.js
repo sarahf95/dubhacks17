@@ -19,3 +19,6 @@ console.log("hello")
 // function videoError(e) {
 //     // do something
 // }
+
+// Not showing vendor prefixes or code that works cross-browser:
+

@@ -1,83 +1,92 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dubhacks 2017</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-  </head>
+</head>
 
-  <body>
+<body>
     <header>
-      <div class="container">
-          <h1 class="site-title">Emotion Aware</h1>
-          <p class="sub-heading">what is going on behind the words?</p>
-      </div>
+        <div class="container">
+            <h1 class="site-title">Emotion Aware</h1>
+            <p class="sub-heading">what is going on behind the words?</p>
+        </div>
     </header>
-    <!-- <form>
-        <p>capture live video</p>
-        <input type="file" accept="video/*;capture=camcorder">
-<input type="file" accept="audio/*;capture=microphone">
-    </form> -->
-<!-- <device type="media" onchange="update(this.data)"></device>
-<video autoplay></video>
-<script>
-  function update(stream) {
-    document.querySelector('video').src = stream.url;
-  }
-</script> -->
-<!-- <video width="320" height="240" controls autoplay></video>
 
-<script>
-  var errorCallback = function(e) {
-    console.log('Reeeejected!', e);
-  };
+    <div id="container">
+        <p>Live Video</p>
+        <video autoplay></video>
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <script>
+            var errorCallback = function (e) {
+                console.log('Reeeejected!', e);
+            };
 
-  // Not showing vendor prefixes.
-  navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
-    var video = document.querySelector('video');
-    video.src = window.URL.createObjectURL(localMediaStream);
 
-    // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
-    // See crbug.com/110938.
-    video.onloadedmetadata = function(e) {
-      // Ready to go. Do some stuff.
-    };
-  }, errorCallback);
-</script> -->
+            function fallback(e) {
+                video.src = 'fallbackvideo.webm';
+            }
 
-<div id="container">
-    <video autoplay="true" id="videoElement">
-    </video>
-<script>
-var video = document.querySelector('video');
+            function success(stream) {
+                video.src = window.URL.createObjectURL(stream);
+            }
 
-navigator.mediaDevices.getUserMedia({video: true, audio: true}).then(function(mediaStream) {
-    video.srcObject  = mediaStream;
-});
-</script>
-</div>
+            navigator.getUserMedia = navigator.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia ||
+                navigator.msGetUserMedia;
+
+            var video = document.querySelector('video');
+            // Not showing vendor prefixes.
+
+            function start() {
+                if (!navigator.getUserMedia) {
+                    fallback();
+                } else {
+                    var localMediaStream = null;
+                    if (navigator.getUserMedia) {
+                        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(function (localMediaStream) {
+                            video = document.querySelector('video');
+                            video.srcObject = localMediaStream;
+                        })
+                    } else {
+                        video.src = 'somevideo.webm'; // fallback.
+                    }
+                    ;
+                }
+            }
+            function stop() {
+                video.srcObject = null;
+            }
+        </script>
+    </div>
 
     <main>
-      <form action="#">
-        <p>image upload</p>
-        <input type="file" name="pic" accept="image/*">
-        <input type="submit">
-      </form>
+        <form action="#">
+            <p>image upload</p>
+            <input type="file" name="pic" accept="image/*">
+            <input type="submit">
+        </form>
 
-      <form action="#">
-        <p>video upload</p>
-        <input type="file" name="vid" accept="video/*">
-        <input type="submit">
-      </form>
+        <form action="#">
+            <p>video upload</p>
+            <input type="file" name="vid" accept="video/*">
+            <input type="submit">
+        </form>
 
-      <form action="#">
-        <p>audio upload</p>
-        <input type="file" name="vid" accept="audio/*">
-        <input type="submit">
-      </form>
+        <form action="#">
+            <p>audio upload</p>
+            <input type="file" name="vid" accept="audio/*">
+            <input type="submit">
+        </form>
+        
     </main>
-  </body>
+</body>
+
 </html>
