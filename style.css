@@ -68,3 +68,7 @@ img {
     height: 150px;
     position: inline-block
 }
+
+.logo {
+    height: 60px
+}
