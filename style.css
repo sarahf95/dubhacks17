@@ -36,7 +36,6 @@ p {
 }
 
 header {
-    background-image: url("../img/header.jpg");
     background-position: center bottom;
     background-repeat: no-repeat;
     background-size: cover;  

@@ -17,14 +17,14 @@
       </div>
     </header>
 
-    <main>
-      <form action="#">
+    <main id="main">
+      <form id="imageForm" action="#">
         <p>image upload</p>
         <input type="file" name="pic" accept="image/*">
         <input type="submit">
       </form>
 
-      <form action="#">
+      <form id="videoForm" action="#">
         <p>video upload</p>
         <input type="file" name="vid" accept="video/*">
         <input type="submit">
@@ -33,8 +33,10 @@
       <form action="#">
         <p>audio upload</p>
         <input type="file" name="vid" accept="audio/*">
-        <input type="submit">
+        <button id="audioForm" type="submit">Submit</button>
       </form>
     </main>
+    <script type="text/javascript"src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   </body>
 </html>
