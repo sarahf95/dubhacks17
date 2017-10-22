@@ -16,6 +16,49 @@
           <p class="sub-heading">what is going on behind the words?</p>
       </div>
     </header>
+    <!-- <form>
+        <p>capture live video</p>
+        <input type="file" accept="video/*;capture=camcorder">
+<input type="file" accept="audio/*;capture=microphone">
+    </form> -->
+<!-- <device type="media" onchange="update(this.data)"></device>
+<video autoplay></video>
+<script>
+  function update(stream) {
+    document.querySelector('video').src = stream.url;
+  }
+</script> -->
+<!-- <video width="320" height="240" controls autoplay></video>
+
+<script>
+  var errorCallback = function(e) {
+    console.log('Reeeejected!', e);
+  };
+
+  // Not showing vendor prefixes.
+  navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
+    var video = document.querySelector('video');
+    video.src = window.URL.createObjectURL(localMediaStream);
+
+    // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
+    // See crbug.com/110938.
+    video.onloadedmetadata = function(e) {
+      // Ready to go. Do some stuff.
+    };
+  }, errorCallback);
+</script> -->
+
+<div id="container">
+    <video autoplay="true" id="videoElement">
+    </video>
+<script>
+var video = document.querySelector('video');
+
+navigator.mediaDevices.getUserMedia({video: true, audio: true}).then(function(mediaStream) {
+    video.srcObject  = mediaStream;
+});
+</script>
+</div>
 
     <main>
       <form action="#">
