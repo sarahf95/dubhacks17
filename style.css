@@ -38,7 +38,7 @@ p {
 header {
     background-position: center bottom;
     background-repeat: no-repeat;
-    background-size: cover;  
+    background-size: cover;
     padding-top: 50px;
     padding-bottom: 25px;
 }
@@ -52,7 +52,6 @@ header {
     color: #999999;
     font-size: 80%;
 }
-
 footer {
     font-size: 10px;
     background-position: center bottom;
