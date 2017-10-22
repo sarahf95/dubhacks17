@@ -53,7 +53,7 @@ console.log("hello")
   					url: url
   				});
           storageRef = url
-
+          console.log(storageRef)
   			});
 
   		});
