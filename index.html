@@ -31,7 +31,7 @@
 
       <form action="#">
         <p>video upload</p>
-        <input type="file" name="vid" accept="video/*">
+        <input type="file" onchange = "readURL(this);" id="file-uploadvid" name="vid" accept="video/*">
         <input type="submit">
       </form>
 
