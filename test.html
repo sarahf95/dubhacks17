@@ -27,19 +27,67 @@
             },
             type: "POST",
             // Request body
-            data: '{"url": "http://weknowyourdreams.com/images/angry/angry-05.jpg"}',
+            data: '{"url": "https://i.pinimg.com/736x/28/64/d5/2864d5114f4f7be2abef0fceb6ccb7c2--funny-mugshots-mug-shots.jpg"}',
         })
         .done(function(data) {
           console.log(data)
 
           var emotions = data[0].scores
+          console.log(emotions)
 
-          $.each(emotions, function(index, element) {
+          // array to make keys of emotions in an array
+          dataArray = [];
+          for (key in emotions) {
+            dataArray.push(key);         // Push the key on the array
+            dataArray.push(emotions[key]); // Push the key's value on the array
+          }
+          console.log(dataArray)
+
+          // finding the max values
+          var array = [];
+
+          for (var key in emotions) {
+              array.push(emotions[key]);
+          }
+          console.log(array)
+
+          function findIndicesOfMax(inp, count) {
+            var outp = [];
+            for (var i = 0; i < inp.length; i++) {
+              outp.push(i); // add index to output array
+              if (outp.length > count) {
+                outp.sort(function(a, b) { return inp[b] - inp[a]; }); // descending sort the output array
+                outp.pop(); // remove the last index (index of smallest element in output array)
+              }
+            }
+            return outp;
+          }
+
+          // getting it out of the function
+          var indices = findIndicesOfMax(array, 3);
+          console.log(indices);
+
+          topEmotions = [];
+          for (i = 0; i < indices.length; i++) {
+            num = indices[i];
+            if (num == 0){
+              topEmotions.push(dataArray[num])
+            }
+            else if (num == 1){
+              topEmotions.push(dataArray[num+1])
+            } else {
+              topEmotions.push(dataArray[num - 1])
+            }
+          }
+          console.log(topEmotions)
+
+
+          $.each(topEmotions, function(index, element) {
+
               $('body').append($('<div>', {
-                  text: index
+                  text: "The emotions the person experiencing likely is " + element
               }));
           });
-
 
         })
 
