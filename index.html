@@ -20,10 +20,82 @@
 
     <div id="container">
         <p>Live Video</p>
+
         <video autoplay></video>
+        <div id="my_camera"></div>
+
+        <img src="">
+        <canvas class="canvas" width="1000" height="1000"></canvas>
         <button onclick="start()">Start</button>
         <button onclick="stop()">Stop</button>
+        <button onclick="start_snapping()">Snapshot</button>
+        <div id="results"></div>
+        <a id="dl-btn" href="#" download="glorious_selfie.png">Save Photo</a>
+<script type="text/javascript" src="webcam.min.js"></script>
         <script>
+            var canvas = document.querySelector('canvas');
+            // var ctx = canvas.getContext('2d');
+            var localMediaStream = null;
+
+
+            var video = document.querySelector('video');
+            var canvas = document.querySelector('canvas');
+            var snapshots = [];
+
+
+
+
+
+            function snapshot() {
+                console.log("snapshot")
+
+                //             if (navigator.getUserMedia) {
+                //                 //   ctx.drawImage(video, 0, 0);
+                //                 // "image/webp" works in Chrome.
+                //                 // Other browsers will fall back to image/png.
+                //                 document.querySelector('video').src = canvas.toDataURL('image/webp');
+                //                 console.log(canvas.toDataURL('image/webp'))
+                //                 snapshots.push(canvas.toDataURL('image/webp'))
+
+                // var img = new Image();
+                //             	img.src = canvas.toDataURL('image/webp');
+
+                //             	document.getElementById('results').appendChild( img );
+
+
+                //             }
+                //             console.log(snapshots);
+
+
+                //     var ctx = canvas.getContext('2d');
+                // ctx.drawImage(video,100,100);
+
+
+// webcam.snap( function(data_uri) {
+//   // display results in page
+//   document.getElementById('results').innerHTML = 
+//   '<img src="'+data_uri+'"/>';
+// } );
+
+                if (navigator.getUserMedia) {
+                    var  width = video.videoWidth;
+       var height = video.videoHeight;
+                    canvas.getContext("2d").drawImage(video, 0, 0, 500, 500, 0, 0, width, height);
+
+                    var img = document.querySelector('img') || document.createElement('img');
+
+                    // var img = canvas.toDataURL("image/png");
+                          img.src = canvas.toDataURL('image/png');
+      document.body.appendChild(img);
+                    snapshots.push(img.src);
+                        document.querySelector('#dl-btn').href = img.src;
+
+                }
+
+                console.log(snapshots);
+            }
+
+
             var errorCallback = function (e) {
                 console.log('Reeeejected!', e);
             };
@@ -63,6 +135,36 @@
             }
             function stop() {
                 video.srcObject = null;
+                video.stop;
+                stop_snapping();
+            }
+
+            var timer = null;
+
+            function take_snapshot() {
+                // take snapshot and get image data
+                // Webcam.snap( function(data_uri) {
+                // 	// display results in page
+                // 	var img = new Image();
+                // 	img.src = data_uri;
+
+                // 	document.getElementById('results').appendChild( img );
+                // } );
+                snapshot();
+            }
+
+            function start_snapping() {
+                if (!timer) {
+                    take_snapshot();
+                    timer = setInterval(take_snapshot, 1000);
+                }
+            }
+
+            function stop_snapping() {
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = null;
+                }
             }
         </script>
     </div>
@@ -85,8 +187,10 @@
             <input type="file" name="vid" accept="audio/*">
             <input type="submit">
         </form>
-        
+
     </main>
+    
+
 </body>
 
 </html>
